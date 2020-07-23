@@ -1,5 +1,6 @@
 import React from 'react'
+import Home from '../components/Home'
 
-const Home = () => <p>Home</p>
+const HomePage = () => <Home />
 
-export default Home
+export default HomePage
