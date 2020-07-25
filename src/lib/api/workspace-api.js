@@ -5,6 +5,18 @@ const getWorkspaceNames = async () => {
   return workspaces.map(c => c.name)
 }
 
+const createNewWorkspace = async params => {
+  const res = await api.post('workspaces', {
+    data: {
+      workspace_name: params.workspaceName,
+      username: params.username,
+      password: params.password,
+    },
+  })
+  return res
+}
+
 export default {
   getWorkspaceNames,
+  createNewWorkspace,
 }

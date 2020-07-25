@@ -31,6 +31,7 @@ const HomepageHeading = ({ mobile }) => (
         marginTop: mobile ? '0.5em' : '1.5em',
       }}
     />
+
     <Link to="/workspaces/new">
       <Button primary size="huge">
         Create a new workspace
@@ -39,7 +40,7 @@ const HomepageHeading = ({ mobile }) => (
 
     <Segment inverted>
       <p>
-        Do you already have an account? Please login <a href="#">here</a>.
+        Do you already have an account? Please login <Link to="/login">here</Link>.
       </p>
     </Segment>
   </Container>
@@ -65,9 +66,9 @@ const DesktopContainer = ({ children }) => {
                 Home
               </Menu.Item>
               <Menu.Item position="right">
-                <Button as="a" inverted={!fixed}>
-                  Log in
-                </Button>
+                <Link to="/login">
+                  <Button inverted={!fixed}>Log in</Button>
+                </Link>
               </Menu.Item>
             </Container>
           </Menu>
@@ -96,7 +97,9 @@ const MobileContainer = ({ children }) => {
         <Menu.Item as="a" active>
           Home
         </Menu.Item>
-        <Menu.Item as="a">Log in</Menu.Item>
+        <Menu.Item as="a">
+          <Link to="/login">Log in</Link>
+        </Menu.Item>
       </Sidebar>
 
       <Sidebar.Pusher dimmed={sidebarOpened}>
@@ -107,9 +110,9 @@ const MobileContainer = ({ children }) => {
                 <Icon name="sidebar" />
               </Menu.Item>
               <Menu.Item position="right">
-                <Button as="a" inverted>
-                  Log in
-                </Button>
+                <Link to="/login">
+                  <Button inverted>Log in</Button>
+                </Link>
               </Menu.Item>
             </Menu>
           </Container>
@@ -173,7 +176,6 @@ const HomepageLayout = () => (
               </a>
             </p>
           </Grid.Column>
-          {/* <Grid.Column floated="right" width={6}></Grid.Column> */}
         </Grid.Row>
       </Grid>
     </Segment>

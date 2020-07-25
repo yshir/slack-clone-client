@@ -7,14 +7,7 @@ import config from '../../config'
 const api = {}
 
 api.request = (path, options = {}) => {
-  const { method, data, refresh } = options
-
-  if (!refresh) {
-    const cachedData = cache.get(path)
-    if (cachedData) {
-      return { ...cachedData, isCached: true }
-    }
-  }
+  const { method, data } = options
 
   return new Promise((resolve, reject) => {
     axios
@@ -24,19 +17,27 @@ api.request = (path, options = {}) => {
         url: `${config.api.root_url}/${path}`,
         data: data || null,
       })
-      .then(async ({ data }) => {
-        cache.put(path, data)
-        resolve({ ...data, isCached: false })
-      })
+      .then(async res => resolve(res.data))
       .catch(err => reject(err.response.data))
   })
 }
 
 api.get = async (path, options = {}) => {
-  if (options.query) {
-    path += `?${qs.stringify(options.query)}`
+  const { query, refresh } = options
+  if (query) {
+    path += `?${qs.stringify(query)}`
   }
-  return await api.request(path, options)
+
+  if (!refresh) {
+    const cachedData = cache.get(path)
+    if (cachedData) {
+      return { ...cachedData, isCached: true }
+    }
+  }
+
+  const data = await api.request(path, options)
+  cache.put(path, data)
+  return { ...data, isCached: false }
 }
 
 api.post = async (path, options = {}) => {
