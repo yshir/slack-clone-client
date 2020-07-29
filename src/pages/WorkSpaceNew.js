@@ -1,13 +1,16 @@
 import _ from 'lodash'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
+import { setToken } from '../lib/auth'
 import workspaceApi from '../lib/api/workspace-api'
+import AppContext from '../contexts/AppContext'
 import WorkspaceNew from '../components/WorkspaceNew'
 import { createValidator } from '../lib/validations/workspace-new-validation'
 
 const WorkspaceNewPage = () => {
   const history = useHistory()
+  const { initialize } = useContext(AppContext)
 
   const [workspaceNames, setWorkspaceNames] = useState([])
   const [sending, setSending] = useState(false)
@@ -57,8 +60,11 @@ const WorkspaceNewPage = () => {
       return
     }
 
+    setToken(token)
+    await initialize()
+
     setSending(false)
-    history.push('/workspaces/new?token=' + token)
+    history.push('/')
   })
 
   useEffect(() => {

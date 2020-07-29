@@ -9,11 +9,15 @@ import NotFound from './pages/NotFound'
 
 const Routes = () => {
   const { pathname } = useLocation()
-  const { isLogin } = useContext(AppContext)
+  const { isLogin, initialized } = useContext(AppContext)
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [pathname])
+
+  if (!initialized) {
+    return <></>
+  }
 
   if (!isLogin) {
     return (

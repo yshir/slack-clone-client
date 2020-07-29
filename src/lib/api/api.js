@@ -2,17 +2,23 @@ import axios from 'axios'
 import cache from 'memory-cache'
 import qs from 'query-string'
 
+import { getToken } from '../auth'
 import config from '../../config'
 
 const api = {}
 
 api.request = (path, options = {}) => {
   const { method, data } = options
+  const token = getToken()
 
   return new Promise((resolve, reject) => {
     axios
       .request({
-        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        headers: {
+          Accept: 'application/json',
+          Authorization: token ? `Bearer ${token}` : null,
+          'Content-Type': 'application/json',
+        },
         method: method || 'get',
         url: `${config.api.root_url}/${path}`,
         data: data || null,
