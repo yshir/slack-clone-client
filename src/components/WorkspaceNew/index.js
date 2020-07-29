@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Segment, Message } from 'semantic-ui-react'
 
 const WorkspaceNew = props => {
   const { form, setForm, submitForm, sending, error } = props
@@ -15,7 +15,7 @@ const WorkspaceNew = props => {
             <Header inverted as="h1" textAlign="left" style={{ fontSize: '3rem', marginBottom: 60 }}>
               Create a new workspace
             </Header>
-            {error.active && <Message error header={error.message} list={error.details} style={{ textAlign: 'left' }} />}
+            {!!error.header && <Message error header={error.header} list={error.list} style={{ textAlign: 'left' }} />}
             <Form size="large" style={{ marginBottom: 60 }}>
               <Form.Input
                 fluid
@@ -44,7 +44,7 @@ const WorkspaceNew = props => {
                 onChange={e => setForm({ password: e.target.value })}
               />
             </Form>
-            <Button primary fluid size="huge" onClick={submitForm} loading={sending} style={{ borderRadius: 100 }}>
+            <Button primary fluid size="huge" onClick={submitForm} loading={sending} disabled={sending} style={{ borderRadius: 100 }}>
               Create
             </Button>
             <p style={{ marginTop: 20 }}>
@@ -67,9 +67,8 @@ WorkspaceNew.propTypes = {
   submitForm: PropTypes.func.isRequired,
   sending: PropTypes.bool.isRequired,
   error: PropTypes.exact({
-    message: PropTypes.string.isRequired,
-    details: PropTypes.arrayOf(PropTypes.string).isRequired,
-    active: PropTypes.bool.isRequired,
+    header: PropTypes.string.isRequired,
+    list: PropTypes.arrayOf(PropTypes.string).isRequired,
   }),
 }
 

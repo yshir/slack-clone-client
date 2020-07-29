@@ -7,14 +7,14 @@ const getWorkspaceNames = async () => {
 
 const createNewWorkspace = async params => {
   try {
-    const { user_id, workspace_id } = await api.post('workspaces', {
+    const { token } = await api.post('workspaces', {
       data: {
         workspace_name: params.workspaceName,
         username: params.username,
         password: params.password,
       },
     })
-    return { user_id, workspace_id }
+    return { token }
   } catch (err) {
     return { error: err }
   }
