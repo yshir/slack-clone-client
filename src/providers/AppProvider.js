@@ -16,7 +16,7 @@ const AppProvider = ({ children }) => {
   const initialize = useCallback(async () => {
     setInitialized(false)
     if (getToken()) {
-      const me = await getMe()
+      const me = await getMe({ refresh: true })
       setUser(me)
 
       const channels = []
