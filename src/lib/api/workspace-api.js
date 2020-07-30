@@ -1,26 +1,26 @@
 import api from './api'
 
-const getWorkspaceNames = async () => {
-  const { workspaces } = await api.get('workspaces')
+export const getWorkspaceNames = async options => {
+  const { workspaces } = await api.get('workspaces', options)
   return workspaces.map(c => c.name)
 }
 
-const createNewWorkspace = async params => {
+export const getCurrentWorkspace = async options => {
+  const { workspace } = await api.get('auth/workspace', options)
+  return workspace
+}
+
+export const createNewWorkspace = async params => {
   try {
-    const { token } = await api.post('workspaces', {
+    const { token, default_channel } = await api.post('workspaces', {
       data: {
         workspace_name: params.workspaceName,
         username: params.username,
         password: params.password,
       },
     })
-    return { token }
+    return { token, default_channel }
   } catch (err) {
     return { error: err }
   }
-}
-
-export default {
-  getWorkspaceNames,
-  createNewWorkspace,
 }

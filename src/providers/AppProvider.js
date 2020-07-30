@@ -3,7 +3,10 @@ import React, { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { getToken } from '../lib/auth'
+import { getChannels } from '../lib/api/channel-api'
 import { getMe } from '../lib/api/me-api'
+import { getCurrentWorkspace } from '../lib/api/workspace-api'
+
 import AppContext from '../contexts/AppContext'
 
 const AppProvider = ({ children }) => {
@@ -19,10 +22,10 @@ const AppProvider = ({ children }) => {
       const me = await getMe({ refresh: true })
       setUser(me)
 
-      const channels = []
+      const channels = await getChannels({ refresh: true })
       setChannels(channels)
 
-      const workspace = {}
+      const workspace = await getCurrentWorkspace({ refresh: true })
       setWorkspace(workspace)
     }
     setInitialized(true)

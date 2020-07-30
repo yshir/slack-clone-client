@@ -3,7 +3,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { setToken } from '../lib/auth'
-import workspaceApi from '../lib/api/workspace-api'
+import { getWorkspaceNames, createNewWorkspace } from '../lib/api/workspace-api'
 import AppContext from '../contexts/AppContext'
 import WorkspaceNew from '../components/WorkspaceNew'
 import { createValidator } from '../lib/validations/workspace-new-validation'
@@ -49,7 +49,7 @@ const WorkspaceNewPage = () => {
       return
     }
 
-    const { error, token } = await workspaceApi.createNewWorkspace(form)
+    const { error, token, default_channel } = await createNewWorkspace(form)
 
     if (error) {
       setError({
@@ -64,12 +64,12 @@ const WorkspaceNewPage = () => {
     await initialize()
 
     setSending(false)
-    history.push('/')
+    history.push(`/channels/${default_channel.id}`)
   })
 
   useEffect(() => {
     const f = async () => {
-      const workspaceNames = await workspaceApi.getWorkspaceNames()
+      const workspaceNames = await getWorkspaceNames()
       setWorkspaceNames(workspaceNames)
     }
     f()
