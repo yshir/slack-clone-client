@@ -9,9 +9,6 @@ const Sidebar = () => {
   const history = useHistory()
 
   const joindChannels = channels.filter(c => c.is_joined)
-  console.log('hi')
-
-  console.log(location.pathname)
 
   return (
     <>

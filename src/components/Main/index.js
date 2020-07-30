@@ -8,6 +8,7 @@ const Main = ({ children }) => {
         style={{
           marginLeft: '250px',
           minWidth: '550px',
+          minHeight: '100vh',
         }}
       >
         {children}
