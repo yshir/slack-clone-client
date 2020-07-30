@@ -34,7 +34,7 @@ const Routes = () => {
       <Redirect from="/login" to="/" />
 
       <Route exact path="/workspaces/new" component={WorkspaceNew} />
-      <Route path="/channels/*" component={Home} />
+      <Route exact path="/channels/:id" component={Home} />
       <Route path="*" component={NotFound} />
     </Switch>
   )
