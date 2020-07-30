@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Button, Segment, Comment, Form, Header } from 'semantic-ui-react'
 import TextareaAutosize from 'react-textarea-autosize'
@@ -8,6 +8,13 @@ import { formatDateTime } from '../../lib/utils'
 
 const Home = props => {
   const { channel, messages, sendMessage, text, setText } = props
+
+  // Scroll to bottom
+  useEffect(() => {
+    const element = document.documentElement
+    const bottom = element.scrollHeight - element.clientHeight
+    window.scroll(0, bottom)
+  }, [messages])
 
   const handleKeyDown = useCallback(e => {
     // Only Enter, not press Shift key
