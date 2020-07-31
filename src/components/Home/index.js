@@ -41,7 +41,7 @@ const Home = props => {
                   <Comment.Metadata>
                     <div>{formatDateTime(m.created_at)}</div>
                   </Comment.Metadata>
-                  <Comment.Text>{m.text}</Comment.Text>
+                  <Comment.Text style={{ whiteSpace: 'pre-wrap' }}>{m.text}</Comment.Text>
                 </Comment.Content>
               </Comment>
             ))}
