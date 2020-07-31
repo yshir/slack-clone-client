@@ -45,6 +45,12 @@ const Sidebar = () => {
               ))}
             </Menu.Menu>
           </Menu.Item>
+          <Menu.Item>
+            <Menu.Menu>
+              <Menu.Item onClick={() => history.push('/channels')}>Browse channels</Menu.Item>
+              <Menu.Item onClick={() => console.log()}>Create a channel</Menu.Item>
+            </Menu.Menu>
+          </Menu.Item>
         </Menu>
       </div>
     </>

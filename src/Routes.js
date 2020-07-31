@@ -5,6 +5,7 @@ import AppContext from './contexts/AppContext'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import WorkspaceNew from './pages/WorkSpaceNew'
+import ChannelList from './pages/ChannelList'
 import NotFound from './pages/NotFound'
 
 const Routes = () => {
@@ -34,6 +35,7 @@ const Routes = () => {
       <Redirect from="/login" to="/" />
 
       <Route exact path="/workspaces/new" component={WorkspaceNew} />
+      <Route exact path="/channels" component={ChannelList} />
       <Route exact path="/channels/:id" component={Home} />
       <Route path="*" component={NotFound} />
     </Switch>

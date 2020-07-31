@@ -5,6 +5,7 @@ import socketIOClient from 'socket.io-client'
 import config from '../config'
 import AppContext from '../contexts/AppContext'
 import Home from '../components/Home'
+import Layout from '../components/Layout'
 import { createMessage, getMessages } from '../lib/api/message-api'
 
 const HomePage = props => {
@@ -39,7 +40,11 @@ const HomePage = props => {
     return () => socket.disconnect()
   }, [])
 
-  return <Home channel={channel} text={text} setText={setText} messages={messages} sendMessage={sendMessage} />
+  return (
+    <Layout title={`#${channel.name}`}>
+      <Home channel={channel} text={text} setText={setText} messages={messages} sendMessage={sendMessage} />
+    </Layout>
+  )
 }
 
 HomePage.propTypes = {
