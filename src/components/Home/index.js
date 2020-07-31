@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Segment, Comment, Form, Header } from 'semantic-ui-react'
+import { Button, Comment, Form, Header, Menu } from 'semantic-ui-react'
 import TextareaAutosize from 'react-textarea-autosize'
 
 import Layout from '../Layout'
@@ -27,37 +27,50 @@ const Home = props => {
   return (
     <>
       <Layout>
-        <Segment style={{ minHeight: '100vh' }}>
-          <Comment.Group>
-            <Header as="h3" dividing>
-              # {channel.name}
-            </Header>
+        <Menu
+          secondary
+          style={{
+            height: '61px',
+            borderBottom: 'solid 1px rgba(34,36,38,.15)',
+            boxShadow: '0 1px 2px 0 rgba(34,36,38,.15)',
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            marginLeft: '250px',
+            backgroundColor: '#FFF',
+            zIndex: 1,
+          }}
+        >
+          <Menu.Item>
+            <Header as="h3">#{channel.name}</Header>
+          </Menu.Item>
+        </Menu>
+        <Comment.Group style={{ margin: '1rem', paddingTop: 'calc(1rem + 61px)' }}>
+          {messages.map((m, i) => (
+            <Comment key={`m_${i}`}>
+              <Comment.Avatar src={`https://i.pravatar.cc/150?img=1`} />
+              <Comment.Content>
+                <Comment.Author as="a">{m.user.username}</Comment.Author>
+                <Comment.Metadata>
+                  <div>{formatDateTime(m.created_at)}</div>
+                </Comment.Metadata>
+                <Comment.Text style={{ whiteSpace: 'pre-wrap' }}>{m.text}</Comment.Text>
+              </Comment.Content>
+            </Comment>
+          ))}
 
-            {messages.map((m, i) => (
-              <Comment key={`m_${i}`}>
-                <Comment.Avatar src={`https://i.pravatar.cc/150?img=1`} />
-                <Comment.Content>
-                  <Comment.Author as="a">{m.user.username}</Comment.Author>
-                  <Comment.Metadata>
-                    <div>{formatDateTime(m.created_at)}</div>
-                  </Comment.Metadata>
-                  <Comment.Text style={{ whiteSpace: 'pre-wrap' }}>{m.text}</Comment.Text>
-                </Comment.Content>
-              </Comment>
-            ))}
-
-            <Form reply>
-              <TextareaAutosize
-                value={text}
-                onChange={e => setText(e.target.value)}
-                onKeyDown={handleKeyDown}
-                rows={1}
-                style={{ lineHeight: 1.5, resize: 'none' }}
-              />
-              <Button content="Add Reply" labelPosition="left" icon="edit" primary onClick={() => sendMessage(text)} />
-            </Form>
-          </Comment.Group>
-        </Segment>
+          <Form reply>
+            <TextareaAutosize
+              value={text}
+              onChange={e => setText(e.target.value)}
+              onKeyDown={handleKeyDown}
+              rows={1}
+              style={{ lineHeight: 1.5, resize: 'none' }}
+            />
+            <Button content="Add Reply" labelPosition="left" icon="edit" primary onClick={() => sendMessage(text)} />
+          </Form>
+        </Comment.Group>
       </Layout>
     </>
   )
