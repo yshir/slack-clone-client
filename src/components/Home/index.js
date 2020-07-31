@@ -51,7 +51,8 @@ const Home = props => {
                 value={text}
                 onChange={e => setText(e.target.value)}
                 onKeyDown={handleKeyDown}
-                style={{ lineHeight: 1.5 }}
+                rows={1}
+                style={{ lineHeight: 1.5, resize: 'none' }}
               />
               <Button content="Add Reply" labelPosition="left" icon="edit" primary onClick={() => sendMessage(text)} />
             </Form>
