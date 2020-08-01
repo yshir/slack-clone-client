@@ -10,10 +10,8 @@ export const createChannel = async params => {
     const { channel } = await api.post('auth/channels', {
       data: {
         name: params.name,
-        description: params.description,
       },
     })
-    console.log(channel)
     return { channel }
   } catch (err) {
     return { error: err }
