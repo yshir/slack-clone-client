@@ -1,7 +1,9 @@
 import React, { useContext } from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
-import AppContext from '../../contexts/AppContext'
 import { Image, Menu } from 'semantic-ui-react'
+
+import AppContext from '../../contexts/AppContext'
+import ChannelNewModal from '../Modal/ChannelNewModal'
 
 const Sidebar = () => {
   const { channels, workspace } = useContext(AppContext)
@@ -48,7 +50,7 @@ const Sidebar = () => {
           <Menu.Item>
             <Menu.Menu>
               <Menu.Item onClick={() => history.push('/channels')}>Browse channels</Menu.Item>
-              <Menu.Item onClick={() => console.log()}>Create a channel</Menu.Item>
+              <ChannelNewModal trigger={<Menu.Item>Create a channel</Menu.Item>} />
             </Menu.Menu>
           </Menu.Item>
         </Menu>
