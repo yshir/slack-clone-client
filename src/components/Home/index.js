@@ -18,7 +18,7 @@ const Home = props => {
 
   return (
     <>
-      <Comment.Group style={{ maxWidth: '1200px' }}>
+      <Comment.Group style={{ maxWidth: '1200px', paddingBottom: '46px' }}>
         {messages.map((m, i) => (
           <Comment key={`m_${i}`}>
             <Comment.Avatar src={`https://i.pravatar.cc/150?img=1`} />
@@ -31,18 +31,20 @@ const Home = props => {
             </Comment.Content>
           </Comment>
         ))}
-        <div
-          style={{
-            position: 'fixed',
-            bottom: 0,
-            right: 0,
-            left: '260px',
-            margin: '1rem',
-          }}
-        >
-          {channel.is_joined ? <MessageInput submit={message => sendMessage(message)} /> : <ChannelJoinButton channelId={channel.id} />}
-        </div>
       </Comment.Group>
+      <div
+        style={{
+          position: 'fixed',
+          bottom: 0,
+          right: 0,
+          left: '260px',
+          padding: '0 1rem 1rem',
+          marginLeft: '-0.7rem',
+          backgroundColor: 'white',
+        }}
+      >
+        {channel.is_joined ? <MessageInput submit={message => sendMessage(message)} /> : <ChannelJoinButton channelId={channel.id} />}
+      </div>
     </>
   )
 }

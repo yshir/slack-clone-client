@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
 import PropTypes from 'prop-types'
-import { Button, Form } from 'semantic-ui-react'
+import { Form } from 'semantic-ui-react'
 
 const MessageInput = props => {
   const { submit } = props
@@ -17,11 +17,6 @@ const MessageInput = props => {
     }
   })
 
-  const handleSubmit = useCallback(() => {
-    submit(text)
-    setText('')
-  })
-
   return (
     <Form reply>
       <TextareaAutosize
@@ -29,9 +24,9 @@ const MessageInput = props => {
         onChange={e => setText(e.target.value)}
         onKeyDown={handleKeyDown}
         rows={1}
+        placeholder="jot something down"
         style={{ lineHeight: 1.5, resize: 'none' }}
       />
-      <Button content="Add Reply" labelPosition="left" icon="edit" primary onClick={handleSubmit} />
     </Form>
   )
 }

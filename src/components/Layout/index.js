@@ -11,7 +11,7 @@ const Layout = ({ children, title }) => {
       <Sidebar />
       <Main>
         <Header title={title} />
-        <main style={{ paddingTop: '61px', margin: '1rem' }}>{children}</main>
+        <main style={{ paddingTop: 'calc(61px + 1rem)', margin: '0 1rem' }}>{children}</main>
       </Main>
     </>
   )
