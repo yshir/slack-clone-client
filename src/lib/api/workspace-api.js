@@ -24,3 +24,17 @@ export const createNewWorkspace = async params => {
     return { error: err }
   }
 }
+
+export const updateWorkspace = async params => {
+  try {
+    const { workspace } = await api.put('auth/workspace', {
+      data: {
+        name: params.name,
+        thumbnail_url: params.thumbnail_url,
+      },
+    })
+    return { workspace }
+  } catch (err) {
+    return { error: err }
+  }
+}

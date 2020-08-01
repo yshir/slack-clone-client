@@ -21,7 +21,7 @@ const Home = props => {
       <Comment.Group style={{ maxWidth: '1200px', paddingBottom: '46px' }}>
         {messages.map((m, i) => (
           <Comment key={`m_${i}`}>
-            <Comment.Avatar src={`https://i.pravatar.cc/150?img=1`} />
+            <Comment.Avatar src={`https://i.pravatar.cc/150?img=${m.user.username.charCodeAt() % 20}`} />
             <Comment.Content>
               <Comment.Author as="a">{m.user.username}</Comment.Author>
               <Comment.Metadata>

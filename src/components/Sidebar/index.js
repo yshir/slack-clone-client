@@ -4,6 +4,7 @@ import { Image, Menu } from 'semantic-ui-react'
 
 import AppContext from '../../contexts/AppContext'
 import ChannelNewModal from '../modals/ChannelNewModal'
+import WorkspaceEditModal from '../modals/WorkspaceEditModal'
 
 const Sidebar = () => {
   const { channels, workspace } = useContext(AppContext)
@@ -31,7 +32,7 @@ const Sidebar = () => {
         <Menu inverted vertical>
           <Menu.Item>
             <Image src="https://via.placeholder.com/150" size="mini" circular spaced />
-            <strong>{workspace.name}</strong>
+            <WorkspaceEditModal trigger={<strong style={{ cursor: 'pointer' }}>{workspace.name}</strong>} />
           </Menu.Item>
           <Menu.Item>
             <strong>Channels</strong>
