@@ -4,6 +4,9 @@
   "description": "slack clone client with React",
   "main": "index.js",
   "scripts": {
+    "build": "npm run build:prod",
+    "build:prod": "APP_ENV=production webpack --config ./webpack.config.js --mode production",
+    "build:stg": "APP_ENV=staging webpack --config ./webpack.config.js --mode production",
     "dev": "APP_ENV=development webpack-dev-server --config ./webpack.config.js --mode development"
   },
   "author": "yshir",
