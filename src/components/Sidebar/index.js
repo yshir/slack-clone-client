@@ -1,7 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useCallback, useContext } from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
 import { Image, Menu } from 'semantic-ui-react'
 
+import { removeToken } from '../../lib/auth'
 import AppContext from '../../contexts/AppContext'
 import ChannelNewModal from '../modals/ChannelNewModal'
 import WorkspaceEditModal from '../modals/WorkspaceEditModal'
@@ -12,6 +13,11 @@ const Sidebar = () => {
   const history = useHistory()
 
   const joindChannels = channels.filter(c => c.is_joined)
+
+  const logout = useCallback(() => {
+    removeToken()
+    window.location.href = '/'
+  })
 
   return (
     <>
@@ -52,6 +58,11 @@ const Sidebar = () => {
             <Menu.Menu>
               <Menu.Item onClick={() => history.push('/channels')}>Browse channels</Menu.Item>
               <ChannelNewModal trigger={<Menu.Item>Create a channel</Menu.Item>} />
+            </Menu.Menu>
+          </Menu.Item>
+          <Menu.Item>
+            <Menu.Menu>
+              <Menu.Item onClick={logout}>Log out</Menu.Item>
             </Menu.Menu>
           </Menu.Item>
         </Menu>
