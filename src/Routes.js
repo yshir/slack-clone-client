@@ -37,7 +37,7 @@ const Routes = () => {
       <Route exact path="/workspaces/new" component={WorkspaceNew} />
       <Route exact path="/channels" component={ChannelList} />
       <Route exact path="/channels/:id" component={Home} />
-      <Route path="*" component={NotFound} />
+      <Redirect from="*" to="/channels" />
     </Switch>
   )
 }
