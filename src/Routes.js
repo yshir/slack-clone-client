@@ -6,7 +6,6 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import WorkspaceNew from './pages/WorkSpaceNew'
 import ChannelList from './pages/ChannelList'
-import NotFound from './pages/NotFound'
 
 const Routes = () => {
   const { pathname } = useLocation()
