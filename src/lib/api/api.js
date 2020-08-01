@@ -50,4 +50,8 @@ api.post = async (path, options = {}) => {
   return await api.request(path, { ...options, method: 'post' })
 }
 
+api.put = async (path, options = {}) => {
+  return await api.request(path, { ...options, method: 'put' })
+}
+
 export default api

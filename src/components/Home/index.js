@@ -1,12 +1,13 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Comment, Form } from 'semantic-ui-react'
-import TextareaAutosize from 'react-textarea-autosize'
+import { Comment } from 'semantic-ui-react'
 
 import { formatDateTime } from '../../lib/utils'
+import MessageInput from '../atoms/MessageInput'
+import ChannelJoinButton from '../atoms/ChannelJoinButton'
 
 const Home = props => {
-  const { messages, sendMessage, text, setText } = props
+  const { channel, messages, sendMessage } = props
 
   // Scroll to bottom
   useEffect(() => {
@@ -15,17 +16,9 @@ const Home = props => {
     window.scroll(0, bottom)
   }, [messages])
 
-  const handleKeyDown = useCallback(e => {
-    // Only Enter, not press Shift key
-    if (e.key === 'Enter' && e.keyCode === 13 && !e.shiftKey) {
-      e.preventDefault()
-      sendMessage()
-    }
-  })
-
   return (
     <>
-      <Comment.Group>
+      <Comment.Group style={{ maxWidth: '1200px' }}>
         {messages.map((m, i) => (
           <Comment key={`m_${i}`}>
             <Comment.Avatar src={`https://i.pravatar.cc/150?img=1`} />
@@ -38,23 +31,35 @@ const Home = props => {
             </Comment.Content>
           </Comment>
         ))}
-
-        <Form reply>
-          <TextareaAutosize
-            value={text}
-            onChange={e => setText(e.target.value)}
-            onKeyDown={handleKeyDown}
-            rows={1}
-            style={{ lineHeight: 1.5, resize: 'none' }}
-          />
-          <Button content="Add Reply" labelPosition="left" icon="edit" primary onClick={() => sendMessage(text)} />
-        </Form>
+        <div
+          style={{
+            position: 'fixed',
+            bottom: 0,
+            right: 0,
+            left: '260px',
+            margin: '1rem',
+          }}
+        >
+          {channel.is_joined ? <MessageInput submit={message => sendMessage(message)} /> : <ChannelJoinButton channelId={channel.id} />}
+        </div>
       </Comment.Group>
     </>
   )
 }
 
 Home.propTypes = {
+  channel: PropTypes.exact({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    is_joined: PropTypes.bool.isRequired,
+    users: PropTypes.arrayOf(
+      PropTypes.exact({
+        username: PropTypes.string.isRequired,
+        displayname: PropTypes.string.isRequired,
+        avatar_url: PropTypes.string,
+      }),
+    ),
+  }),
   messages: PropTypes.arrayOf(
     PropTypes.exact({
       text: PropTypes.string.isRequired,
@@ -67,8 +72,6 @@ Home.propTypes = {
     }),
   ),
   sendMessage: PropTypes.func.isRequired,
-  text: PropTypes.string.isRequired,
-  setText: PropTypes.func.isRequired,
 }
 
 export default Home

@@ -17,3 +17,14 @@ export const createChannel = async params => {
     return { error: err }
   }
 }
+
+export const joinChannel = async channelId => {
+  try {
+    console.log('hu')
+    const res = await api.put(`auth/channels/${channelId}/join`)
+    console.log(res)
+    return res
+  } catch (err) {
+    return { error: err }
+  }
+}

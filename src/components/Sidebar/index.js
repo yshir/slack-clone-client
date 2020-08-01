@@ -3,7 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom'
 import { Image, Menu } from 'semantic-ui-react'
 
 import AppContext from '../../contexts/AppContext'
-import ChannelNewModal from '../Modal/ChannelNewModal'
+import ChannelNewModal from '../modals/ChannelNewModal'
 
 const Sidebar = () => {
   const { channels, workspace } = useContext(AppContext)

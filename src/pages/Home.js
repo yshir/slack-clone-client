@@ -11,16 +11,14 @@ import { createMessage, getMessages } from '../lib/api/message-api'
 const HomePage = props => {
   const { channels } = useContext(AppContext)
   const [messages, setMessages] = useState([])
-  const [text, setText] = useState('')
 
   const channelId = props.match.params.id
   const channel = channels.find(c => c.id === channelId)
 
-  const sendMessage = useCallback(async () => {
+  const sendMessage = useCallback(async text => {
     if (!text.trim()) {
       return
     }
-    setText('')
     await createMessage({ channel_id: channelId, text })
   })
 
@@ -42,7 +40,7 @@ const HomePage = props => {
 
   return (
     <Layout title={`#${channel.name}`}>
-      <Home channel={channel} text={text} setText={setText} messages={messages} sendMessage={sendMessage} />
+      <Home channel={channel} messages={messages} sendMessage={sendMessage} />
     </Layout>
   )
 }
