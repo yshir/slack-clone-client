@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Button, Form, Grid, Header, Segment, Message } from 'semantic-ui-react'
@@ -6,6 +6,12 @@ import { Button, Form, Grid, Header, Segment, Message } from 'semantic-ui-react'
 const WorkspaceNew = props => {
   const { form, setForm, submitForm, sending, error } = props
   const { workspaceName, username, password } = form
+
+  const handleKeyPress = useCallback(e => {
+    if (e.key == 'Enter') {
+      submitForm()
+    }
+  })
 
   return (
     <>
@@ -24,6 +30,7 @@ const WorkspaceNew = props => {
                 placeholder="Workspace name"
                 value={workspaceName}
                 onChange={e => setForm({ workspaceName: e.target.value })}
+                onKeyPress={handleKeyPress}
               />
               <Form.Input
                 fluid
@@ -32,6 +39,7 @@ const WorkspaceNew = props => {
                 placeholder="Username"
                 value={username}
                 onChange={e => setForm({ username: e.target.value })}
+                onKeyPress={handleKeyPress}
               />
               <Form.Input
                 fluid
@@ -42,6 +50,7 @@ const WorkspaceNew = props => {
                 autoComplete="new-password"
                 value={password}
                 onChange={e => setForm({ password: e.target.value })}
+                onKeyPress={handleKeyPress}
               />
             </Form>
             <Button primary fluid size="huge" onClick={submitForm} loading={sending} disabled={sending} style={{ borderRadius: 100 }}>
