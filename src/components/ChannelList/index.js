@@ -38,7 +38,7 @@ ChannelList.propTypes = {
         PropTypes.exact({
           username: PropTypes.string.isRequired,
           displayname: PropTypes.string.isRequired,
-          avatar_url: PropTypes.string.isRequired,
+          avatar_url: PropTypes.string,
         }),
       ),
     }),

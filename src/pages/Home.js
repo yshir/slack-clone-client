@@ -33,7 +33,10 @@ const HomePage = props => {
   useEffect(() => {
     const socket = socketIOClient(config.socket.endpoint)
     socket.on(config.socket.events.update_message, data => {
-      setMessages(prevMessages => [...prevMessages, data.message])
+      const { message } = data
+      if (message.channel_id === channelId) {
+        setMessages(prevMessages => [...prevMessages, data.message])
+      }
     })
     return () => socket.disconnect()
   }, [])

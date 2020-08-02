@@ -64,6 +64,7 @@ Home.propTypes = {
   }),
   messages: PropTypes.arrayOf(
     PropTypes.exact({
+      channel_id: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
       created_at: PropTypes.string.isRequired,
       user: PropTypes.exact({
