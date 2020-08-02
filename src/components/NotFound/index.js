@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Container, Header, Segment } from 'semantic-ui-react'
+import { Container, Header, Segment } from 'semantic-ui-react'
 
 const NotFound = () => (
   <>
@@ -26,9 +26,6 @@ const NotFound = () => (
             marginTop: '1.5em',
           }}
         />
-        <Button as="a" primary size="large" href="/" style={{ marginTop: 60 }}>
-          GO BACK HOME
-        </Button>
       </Container>
     </Segment>
   </>

@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import WorkspaceNew from './pages/WorkSpaceNew'
 import ChannelList from './pages/ChannelList'
+import UserNew from './pages/UserNew'
 
 const Routes = () => {
   const { pathname } = useLocation()
@@ -23,6 +24,7 @@ const Routes = () => {
     return (
       <Switch>
         <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={UserNew} />
         <Route exact path="/workspaces/new" component={WorkspaceNew} />
         <Redirect from="*" to="/login" />
       </Switch>
@@ -33,6 +35,7 @@ const Routes = () => {
     <Switch>
       <Redirect from="/login" to="/" />
 
+      <Route exact path="/register" component={UserNew} />
       <Route exact path="/workspaces/new" component={WorkspaceNew} />
       <Route exact path="/channels" component={ChannelList} />
       <Route exact path="/channels/:id" component={Home} />

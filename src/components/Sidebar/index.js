@@ -5,6 +5,7 @@ import { Image, Menu } from 'semantic-ui-react'
 import { removeToken } from '../../lib/auth'
 import AppContext from '../../contexts/AppContext'
 import ChannelNewModal from '../modals/ChannelNewModal'
+import UserInviteModal from '../modals/UserInviteModal'
 import WorkspaceEditModal from '../modals/WorkspaceEditModal'
 
 const Sidebar = () => {
@@ -58,6 +59,7 @@ const Sidebar = () => {
             <Menu.Menu>
               <Menu.Item onClick={() => history.push('/channels')}>Browse channels</Menu.Item>
               <ChannelNewModal trigger={<Menu.Item>Create a channel</Menu.Item>} />
+              <UserInviteModal trigger={<Menu.Item>Invite people</Menu.Item>} />
             </Menu.Menu>
           </Menu.Item>
           <Menu.Item>
